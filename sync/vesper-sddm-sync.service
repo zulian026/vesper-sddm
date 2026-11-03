@@ -1,0 +1,10 @@
+[Unit]
+Description=Synchronize Adaptive Colors with VESPER SDDM Theme
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/sddm/themes/vesper/sync/sync-colors.sh /usr/share/sddm/themes/vesper
+
+[Install]
+WantedBy=default.target

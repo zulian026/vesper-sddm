@@ -1,0 +1,15 @@
+# SDDM Theme & Testing artifacts
+*.swp
+*~
+.directory
+*.bak_*
+/assets/preview/layout_*_regression.png
+
+# Temporary and sandbox directories
+/tmp/
+
+# OS and Editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

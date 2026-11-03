@@ -1,0 +1,11 @@
+[SddmGreeterTheme]
+Name=VESPER
+Description=A Minimal, Adaptive SDDM Theme
+Author=Zyan
+Type=sddm-theme
+Version=1.0.0
+Website=https://github.com/zyan/vesper-sddm
+MainScript=Main.qml
+ConfigFile=theme.conf
+Theme-API=2.0
+QtVersion=6
