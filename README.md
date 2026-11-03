@@ -11,7 +11,7 @@
 
 **VESPER** is an independent, production-ready login theme for SDDM (Simple Desktop Display Manager) built with Qt 6 QML. Designed around editorial typography, negative space, and semantic color adaptation, VESPER removes conventional login card clutter and lets your desktop wallpaper set the atmosphere.
 
-![VESPER Left Editorial Preview](assets/preview/layout_left_editorial_refined.png)
+![VESPER Layout Gallery](docs/screenshots/layout-gallery.png)
 
 ---
 
@@ -27,18 +27,43 @@
 
 ---
 
-## 2. Six Available Layouts
+## 2. Layout Gallery
 
-VESPER includes six validated layout variants selectable via `theme.conf`:
+VESPER comes equipped with six distinct, fully responsive layout architectures:
 
-| Layout | Style | Description |
-| :--- | :--- | :--- |
-| **`left-editorial`** | *Primary* | Asymmetric, spacious typography with left-aligned clock and auth controls, keeping wallpaper artwork dominant. |
-| **`center`** | *Baseline* | Balanced centered card composition with digital clock stacked above the login panel. |
-| **`right-sidebar`** | *Sidebar* | Clean right-docked panel housing the digital clock, authentication controls, and power options. |
-| **`split-screen`** | *Dual-pane* | Fifty-fifty composition with ambient time display on the left and full-height login column on the right. |
-| **`bottom-center`** | *Minimal* | Floating clock in the upper viewport with compact authentication controls docked neatly at the bottom. |
-| **`compact-floating`** | *Floating* | Ultra-compact floating login dialog for users desiring maximum screen clearance. |
+### ✦ Left Editorial (`left-editorial`) — *Primary Default*
+Asymmetric editorial composition with prominent typography and left-aligned controls, preserving generous negative space for wallpaper artwork.
+![Left Editorial Layout](docs/screenshots/left-editorial.png)
+
+---
+
+### ✦ Center (`center`) — *Baseline Regression*
+Classic centered card composition with a large digital clock stacked cleanly above the authentication panel.
+![Center Layout](docs/screenshots/center.png)
+
+---
+
+### ✦ Right Sidebar (`right-sidebar`)
+Full-height vertical sidebar docked along the right viewport edge containing the clock, login form, and power controls.
+![Right Sidebar Layout](docs/screenshots/right-sidebar.png)
+
+---
+
+### ✦ Split Screen (`split-screen`)
+Balanced dual-pane layout featuring an ambient time display across the left half and interactive login controls on the right.
+![Split Screen Layout](docs/screenshots/split-screen.png)
+
+---
+
+### ✦ Bottom Center (`bottom-center`)
+Floating digital clock positioned in the upper viewport with compact authentication controls docked neatly along the bottom edge.
+![Bottom Center Layout](docs/screenshots/bottom-center.png)
+
+---
+
+### ✦ Compact Floating (`compact-floating`)
+Minimal floating authentication card with a discrete independent clock in the upper-left corner for maximum wallpaper visibility.
+![Compact Floating Layout](docs/screenshots/compact-floating.png)
 
 ---
 
@@ -49,10 +74,15 @@ VESPER includes six validated layout variants selectable via `theme.conf`:
 - **Qt 6 Declarative** (`qt6-declarative`, `qt6-svg`)
 - **Python 3.11+** (used by the color synchronization tool)
 
+### Optional Dependencies (for Headless Screenshot Rendering)
+- **C++17 Compiler & Qt 6 Development Headers** (`g++` or `clang`, `qt6-base`, `qt6-declarative`, `pkg-config`)
+- **ImageMagick 7+** (optional, used for assembling composite gallery overviews)
+
 ---
 
-## 4. Preview Without Root
+## 4. Preview & Offline Rendering
 
+### Interactive Preview
 You can safely test VESPER in a windowed sandbox inside your active graphical desktop without modifying system display manager configurations:
 
 ```bash
@@ -65,6 +95,13 @@ You can safely test VESPER in a windowed sandbox inside your active graphical de
 ./preview.sh --layout split-screen
 ./preview.sh --layout bottom-center
 ./preview.sh --layout compact-floating
+```
+
+### Headless Screenshot Rendering
+VESPER includes a built-in offscreen renderer to generate pixel-perfect 1920x1080 screenshots of any layout without requiring an external monitor:
+
+```bash
+./preview.sh --layout left-editorial --screenshot docs/screenshots/left-editorial.png
 ```
 
 ---
@@ -183,7 +220,7 @@ vesper/
 ├── Main.qml                  # Root display manager view & signal routing
 ├── theme.conf                # SDDM properties & active color tokens
 ├── palette.json              # Serialized semantic color tokens
-├── preview.sh                # Windowed testing runner (sandboxed)
+├── preview.sh                # Windowed testing runner & 1080p renderer
 ├── install.sh                # Safe system installer with automated backups
 ├── rollback.sh               # System restoration utility
 ├── assets/
@@ -192,7 +229,7 @@ vesper/
 │   │   ├── Inter.ttf         # SIL OFL 1.1 font
 │   │   └── tabler-icons.ttf  # Tabler vector glyph font
 │   ├── icons/                # Standalone SVG icons
-│   └── preview/              # Visual screenshots & documentation media
+│   └── preview/              # Historical preview media
 ├── components/
 │   ├── Colors.qml            # Reactive color token loader & fallbacks
 │   ├── Clock.qml             # Tabular digital clock & formatted date
@@ -204,6 +241,15 @@ vesper/
 │   ├── KeyboardSelector.qml  # Keyboard layout indicator
 │   ├── PowerBar.qml          # Suspend, Reboot, and PowerOff actions
 │   └── LoginPanel.qml        # Authentication form & error feedback
+├── docs/
+│   └── screenshots/          # 1920x1080 layout gallery screenshots
+│       ├── layout-gallery.png
+│       ├── left-editorial.png
+│       ├── center.png
+│       ├── right-sidebar.png
+│       ├── split-screen.png
+│       ├── bottom-center.png
+│       └── compact-floating.png
 ├── layouts/
 │   ├── LeftEditorial.qml     # Primary editorial layout
 │   ├── CenterLayout.qml      # Baseline centered layout
@@ -213,6 +259,7 @@ vesper/
 │   └── CompactFloating.qml   # Floating dialog layout
 └── sync/
     ├── sync-colors.sh        # Wallpaper & adaptive color sync script
+    ├── render-screenshot.cpp # Offscreen 1080p QML renderer source
     └── vesper-sddm-sync.service # Systemd service unit
 ```
 
